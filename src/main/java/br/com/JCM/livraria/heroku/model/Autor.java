@@ -1,4 +1,4 @@
-package br.com.JCM.livraria.model;
+package br.com.JCM.livraria.heroku.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

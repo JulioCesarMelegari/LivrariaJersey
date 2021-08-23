@@ -1,4 +1,4 @@
-package br.com.JCM.livraria.model;
+package br.com.JCM.livraria.heroku.model;
 
 import java.util.ArrayList;
 import java.util.List;
