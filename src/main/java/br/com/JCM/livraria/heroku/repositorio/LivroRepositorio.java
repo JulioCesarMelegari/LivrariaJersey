@@ -30,4 +30,13 @@ public class LivroRepositorio {
 		return new ArrayList<>(livros.values());
 	}
 
+	public Livro getLivroPorIsbn(String isbn) {
+		for (Livro livro : livros.values()) {
+			if(isbn.equals(livro.getIsbn())) {
+				return livro;
+			}
+		}
+		return null;
+	}
+
 }
