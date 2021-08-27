@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.JCM.livraria.heroku.model.Livro;
+import br.com.JCM.livraria.heroku.repositorio.exception.LivroNaoEncontradoException;
 
 public class LivroRepositorio {
 	
@@ -36,7 +37,7 @@ public class LivroRepositorio {
 				return livro;
 			}
 		}
-		return null;
+		throw new LivroNaoEncontradoException();
 	}
 
 }
