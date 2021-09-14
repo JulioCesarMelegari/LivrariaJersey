@@ -6,13 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.JCM.livraria.heroku.model.Livro;
+import br.com.JCM.livraria.heroku.repositorio.exception.LivroExistenteException;
 import br.com.JCM.livraria.heroku.repositorio.exception.LivroNaoEncontradoException;
 
 public class LivroRepositorio {
 	
 	private Map<Long, Livro> livros = new HashMap<>();
 	
-	public LivroRepositorio() {
+	private static LivroRepositorio repo;
+	
+	public static LivroRepositorio getInstance() {
+		if(repo == null) {
+			repo = new LivroRepositorio();
+		}
+		return repo;
+	}
+	
+	private LivroRepositorio() {
 		Livro livro1 = new Livro(1L, "O Livreiro de Cabul", "ISBN:9788577991082", "Conto", 14.90, "Asne Seierstad");
 		Livro livro2 = new Livro(2L, "O Guarani", "ISBN:9788525416117", "Romance", 33.24, "José de Alencar");
 		Livro livro3 = new Livro(3L, "Papéis Avulsos", "ISBN:8567097223", "Romance", 24.90, "Machado de Assis");
@@ -38,6 +48,26 @@ public class LivroRepositorio {
 			}
 		}
 		throw new LivroNaoEncontradoException();
+	}
+	
+	public void adicionaLivro(Livro livro) {
+		if(livros.containsKey(livro.getId())) {
+			throw new LivroExistenteException();
+		}
+		
+		livros.put(livro.getId(), livro);
+	}
+	
+	public void atualizarLivro(Livro livro) {
+		livros.put(livro.getId(), livro);
+	}
+	
+	public void removerLivro(Long id) {
+		if(livros.containsKey(id)) {
+			livros.remove(id);
+		} else {
+			throw new LivroNaoEncontradoException();
+		}
 	}
 
 }
